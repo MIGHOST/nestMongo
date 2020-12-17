@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { GoodsModule } from './goods/goods.module';
 import { AppService } from './app.service';
+// import { ConnectOptions } from 'mongoose'
 import { config } from 'dotenv';
 config();
 const { DB_URI } = process.env;
