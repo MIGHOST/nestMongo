@@ -1,21 +1,26 @@
-import { Module } from '@nestjs/common';
+import { join } from 'path';
+import { config } from 'dotenv';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GraphQLModule } from '@nestjs/graphql';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { GoodsModule } from './goods/goods.module';
 import { AppService } from './app.service';
-// import { ConnectOptions } from 'mongoose'
-import { config } from 'dotenv';
+
+
 config();
-const { DB_URI } = process.env;
+const { DB_U, DB_URI} = process.env;
 @Module({
   imports: [
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+
+    }),  
+    MongooseModule.forRoot(`${DB_URI}`),
     GoodsModule,
-    MongooseModule.forRoot(
-      // `mongodb+srv://root:root@cluster0.0va7l.mongodb.net/try?retryWrites=true&w=majority`,
-      `${DB_URI}`
-    ),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+

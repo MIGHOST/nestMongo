@@ -1,0 +1,19 @@
+type Goods {
+    id: ID!
+    name: String!
+    price: String!
+}
+
+type Query {
+    goods: [Goods!]!
+}
+
+input NewGoods {
+    name:String!
+    price: String!
+}
+type Mutation {
+    createGoods(input: NewGoods!): Goods!
+    updateGoods(input: NewGoods): Goods!
+    deleteGoods(id:ID!): Goods!
+}
